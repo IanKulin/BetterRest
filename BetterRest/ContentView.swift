@@ -33,12 +33,20 @@ struct ContentView: View {
                         DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute).labelsHidden()
                     }
                 }.textCase(nil)
-                Section(header: Text("Desired amount of sleep?").font(.title2).foregroundColor(.primary)) {
-
+                
+                Section(header: Text("Desired amount of sleep?")
+                    .font(.title2).foregroundColor(.primary)) {
                     Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 4...12, step: 0.25)
                 }.textCase(nil)
-                Section(header: Text("Daily coffee intake?").font(.title2).foregroundColor(.primary)) {
-                    Stepper(coffeeAmount == 1 ? "1 cup" : "\(coffeeAmount) cups", value: $coffeeAmount, in: 1...20)
+                
+                Section(header: Text("Daily coffee intake?")
+                    .font(.title2).foregroundColor(.primary)) {
+                        Picker(coffeeAmount == 1 ? "1 cup" : "\(coffeeAmount) cups", selection: $coffeeAmount){
+                            Text("1 cup")
+                            ForEach(2...20, id: \.self) { i in
+                                Text("\(i) cups")
+                            }
+                        }
                 }.textCase(nil)
             }
             .navigationTitle("Better Rest")
