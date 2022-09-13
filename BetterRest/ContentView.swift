@@ -37,13 +37,9 @@ struct ContentView: View {
                 
                 Section(header: Text("Daily coffee intake?")
                     .font(.title2).foregroundColor(.primary)) {
-                        Picker(coffeeAmount == 1 ? "1 cup" : "\(coffeeAmount) cups", selection: $coffeeAmount){
-                            ForEach(1...20, id: \.self) { i in
-                                if i == 1 {
-                                    Text("1 cup")
-                                } else {
-                                    Text("\(i) cups")
-                                }
+                        Picker("Number of cups", selection: $coffeeAmount) {
+                            ForEach(1..<21) {
+                                Text(String($0))
                             }
                         }
                     }.textCase(nil)
