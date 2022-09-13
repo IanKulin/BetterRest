@@ -27,21 +27,19 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             Form {
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("When do you want to wake up?").font(.headline)
+                Section(header: Text("When do you want to wake up?").font(.title2).foregroundColor(.primary)) {
                     HStack {
                         Spacer()
                         DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute).labelsHidden()
                     }
-                }
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("Desired amount of sleep?").font(.headline)
+                }.textCase(nil)
+                Section(header: Text("Desired amount of sleep?").font(.title2).foregroundColor(.primary)) {
+
                     Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 4...12, step: 0.25)
-                }
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("Daily coffee intake?").font(.headline)
+                }.textCase(nil)
+                Section(header: Text("Daily coffee intake?").font(.title2).foregroundColor(.primary)) {
                     Stepper(coffeeAmount == 1 ? "1 cup" : "\(coffeeAmount) cups", value: $coffeeAmount, in: 1...20)
-                }
+                }.textCase(nil)
             }
             .navigationTitle("Better Rest")
             .toolbar { Button("Calculate", action: calculateBedtime) }
